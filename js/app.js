@@ -76,6 +76,8 @@ function animate() {
 
     neptureOrbit.rotation.y += 0.01;  // Neptune's orbit: Rotate the neptuneOrbit around the sun
 
+
+
     // Update the controls
     controls.update(); // Only required if controls.enableDamping = true, or if controls.autoRotate = true
 
@@ -127,7 +129,7 @@ function mercury_loader() {
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
 
-    const mercuryGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+    const mercuryGeometry = new THREE.SphereGeometry(0.6, 32, 32);
     const mercuryMaterial = new THREE.MeshBasicMaterial({ map: mercuryTexture });
     const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 
@@ -150,7 +152,7 @@ function venus_loader() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
-    const venusGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+    const venusGeometry = new THREE.SphereGeometry(1, 32, 32);
     const venusMaterial = new THREE.MeshBasicMaterial({ map: venusTexture });
     const venus = new THREE.Mesh(venusGeometry, venusMaterial);
 
@@ -169,7 +171,7 @@ function earth_loader() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
-    const earthGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const earthGeometry = new THREE.SphereGeometry(1.3, 32, 32);
     const earthMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
     const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 
@@ -207,7 +209,7 @@ function jupiter_loader() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
-    const jupiterGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const jupiterGeometry = new THREE.SphereGeometry(7, 32, 32);
     const jupiterMaterial = new THREE.MeshBasicMaterial({ map: jupiterTexture });
     const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 
@@ -226,7 +228,7 @@ function saturn_loader() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
-    const saturnGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const saturnGeometry = new THREE.SphereGeometry(5, 32, 32);
     const saturnMaterial = new THREE.MeshBasicMaterial({ map: saturnTexture });
     const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
 
@@ -245,7 +247,7 @@ function uranus_loader() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
-    const uranusGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const uranusGeometry = new THREE.SphereGeometry(4.5, 32, 32);
     const uranusMaterial = new THREE.MeshBasicMaterial({ map: uranusTexture });
     const uranus = new THREE.Mesh(uranusGeometry, uranusMaterial);
 
@@ -264,7 +266,7 @@ function nepture_loader() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.anisotropy = renderer.getMaxAnisotropy();
     });
-    const neptureGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const neptureGeometry = new THREE.SphereGeometry(4.2, 32, 32);
     const neptureMaterial = new THREE.MeshBasicMaterial({ map: neptureTexture });
     const nepture = new THREE.Mesh(neptureGeometry, neptureMaterial);
 
@@ -276,8 +278,6 @@ function nepture_loader() {
     return neptureOrbit;
 }
 
-
-// Optional: Create a visible orbit for Mercury
 function addOrbitPath(x, y, color) {
     const orbitGeometry = new THREE.RingGeometry(x, y, 100); // Adjust size to match the orbit
     const orbitMaterial = new THREE.MeshBasicMaterial({
