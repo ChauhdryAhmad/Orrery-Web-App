@@ -10,6 +10,8 @@ document.body.appendChild(renderer.domElement);
 // Add OrbitControls
 const controls = new THREE.OrbitControls(camera, renderer.domElement); // Initialize controls
 
+
+
 backgroung_loader();
 
 let sun = sun_loader();
@@ -38,6 +40,8 @@ addOrbitPath(92, 92.5, 0x00fec0);
 let neptureOrbit = nepture_loader();
 addOrbitPath(115, 115.5, 0x009afe);
 
+let blackhole = blackhole_loader();
+
 
 
 // Add a point light to simulate sunlight
@@ -60,21 +64,21 @@ function animate() {
     sun.rotation.y += 0.001;
 
     // Mercury's orbit: Rotate the mercuryOrbit around the sun
-    mercuryOrbit.rotation.y += 0.00713954; 
+    mercuryOrbit.mercuryOrbit.rotation.y += 0.00713954; 
 
-    venusOrbit.rotation.y += 0.017; 
+    venusOrbit.venusOrbit.rotation.y += 0.0027925268; 
 
-    earthOrbit.rotation.y += 0.01;  
+    earthOrbit.earthOrbit.rotation.y += 0.0017214206;  
 
-    marsOrbit.rotation.y += 0.01;
+    marsOrbit.marsOrbit.rotation.y += 0.0017214206;
 
-    jupiterOrbit.rotation.y += 0.005;
+    jupiterOrbit.jupiterOrbit.rotation.y += 0.0001450077;
 
-    saturnOrbit.rotation.y += 0.004;
+    saturnOrbit.saturnOrbit.rotation.y += 0.0000583993;
 
-    uranusOrbit.rotation.y += 0.003;
+    uranusOrbit.uranusOrbit.rotation.y += 0.0000204751;
 
-    neptureOrbit.rotation.y += 0.01;  // Neptune's orbit: Rotate the neptuneOrbit around the sun
+    neptureOrbit.neptureOrbit.rotation.y += 0.0000104389;  // Neptune's orbit: Rotate the neptuneOrbit around the sun
 
 
 
@@ -141,7 +145,7 @@ function mercury_loader() {
     // Set Mercury's initial position along its orbit (distance from the sun)
     mercury.position.x = 5;
 
-    return mercuryOrbit;
+    return {mercuryOrbit, mercury};
 }
 
 // Venus Load
@@ -159,8 +163,8 @@ function venus_loader() {
     const venusOrbit = new THREE.Object3D();
     venusOrbit.add(venus);
     scene.add(venusOrbit);
-    venus.position.x = 9;
-    return venusOrbit;
+    venus.position.x = -9;
+    return {venusOrbit, venus};
 }
 
 // Earth Load
@@ -179,7 +183,7 @@ function earth_loader() {
     earthOrbit.add(earth);
     scene.add(earthOrbit);
     earth.position.x = 14;
-    return earthOrbit;
+    return {earthOrbit, earth};
 }
 
 // Mars Load
@@ -197,8 +201,8 @@ function mars_loader() {
     const marsOrbit = new THREE.Object3D();
     marsOrbit.add(mars);
     scene.add(marsOrbit);
-    mars.position.x = 21;
-    return marsOrbit;
+    mars.position.x = -21;
+    return {marsOrbit, mars};
 }
 
 // Jupiter Load
@@ -217,7 +221,7 @@ function jupiter_loader() {
     jupiterOrbit.add(jupiter);
     scene.add(jupiterOrbit);
     jupiter.position.x = 51;
-    return jupiterOrbit;
+    return {jupiterOrbit, jupiter};
 }
 
 // Saturn Load
@@ -235,8 +239,8 @@ function saturn_loader() {
     const saturnOrbit = new THREE.Object3D();
     saturnOrbit.add(saturn);
     scene.add(saturnOrbit);
-    saturn.position.x = 70;
-    return saturnOrbit;
+    saturn.position.x = -70;
+    return {saturnOrbit, saturn};
 }
 
 // Uranus Load
@@ -255,7 +259,7 @@ function uranus_loader() {
     uranusOrbit.add(uranus);
     scene.add(uranusOrbit);
     uranus.position.x = 92;
-    return uranusOrbit;
+    return {uranusOrbit, uranus};
 }
 
 // Nepture Load
@@ -273,9 +277,9 @@ function nepture_loader() {
     const neptureOrbit = new THREE.Object3D();
     neptureOrbit.add(nepture);
     scene.add(neptureOrbit);
-    nepture.position.x = 115;
+    nepture.position.x = -115;
     
-    return neptureOrbit;
+    return {neptureOrbit, nepture};
 }
 
 function addOrbitPath(x, y, color) {
@@ -289,3 +293,95 @@ function addOrbitPath(x, y, color) {
     scene.add(orbit);
 }
 
+function blackhole_loader() {
+    const textureLoader = new THREE.TextureLoader();
+    const blackholeTexture = textureLoader.load('assets/blackhole.jpg', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.anisotropy = renderer.getMaxAnisotropy();
+    });
+    const blackholeGeometry = new THREE.SphereGeometry(7.2, 32, 32);
+    const blackholeMaterial = new THREE.MeshBasicMaterial({ map: blackholeTexture });
+    const blackhole = new THREE.Mesh(blackholeGeometry, blackholeMaterial);
+
+    // const blackholeOrbit = new THREE.Object3D();
+    // blackholeOrbit.add(blackhole);
+    scene.add(blackhole);
+    blackhole.position.x = -100;
+    blackhole.position.y = 110;
+    
+    return blackhole;
+}
+
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// Add an event listener for mouse clicks
+window.addEventListener('click', onMouseClick, false);
+
+// Function to handle the mouse click
+function onMouseClick(event) {
+    // Convert mouse coordinates to normalized device coordinates
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Update the raycaster with the current camera and mouse position
+    raycaster.setFromCamera(mouse, camera);
+
+    // Check for intersections between the ray and the black hole
+    const blackhole_intersect = raycaster.intersectObject(blackhole);
+
+    if (blackhole_intersect.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const mercury = raycaster.intersectObject(mercuryOrbit.mercury);
+
+    if (mercury.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const venus = raycaster.intersectObject(venusOrbit.venus);
+
+    if (venus.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const earth = raycaster.intersectObject(earthOrbit.earth);
+
+    if (earth.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const mars = raycaster.intersectObject(marsOrbit.mars);
+
+    if (mars.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const jupiter = raycaster.intersectObject(jupiterOrbit.jupiter);
+
+    if (jupiter.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const saturn = raycaster.intersectObject(saturnOrbit.saturn);
+
+    if (saturn.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const uranus = raycaster.intersectObject(uranusOrbit.uranus);
+
+    if (uranus.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+    const nepture = raycaster.intersectObject(neptureOrbit.nepture);
+
+    if (nepture.length > 0) {
+        window.location.href = 'blackhole.html';
+    }
+
+}
