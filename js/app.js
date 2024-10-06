@@ -385,4 +385,10 @@ function onMouseClick(event) {
         window.location.href = 'solar-system/neptune.html';
     }
 
+    const sun_in = raycaster.intersectObject(sun);
+
+    if (sun_in.length > 0) {
+        window.location.href = 'solar-system/sun.html';
+    }
+
 }
