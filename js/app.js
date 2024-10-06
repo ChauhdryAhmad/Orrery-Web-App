@@ -1,6 +1,8 @@
 // Set up the scene, camera, and renderer
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.9, 1000);
+camera.position.set(0, 15, 15);
+camera.rotation.x = THREE.Math.degToRad(15);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -13,28 +15,30 @@ backgroung_loader();
 let sun = sun_loader();
 
 let mercuryOrbit = mercury_loader();
-addOrbitPath(5, 5.05);
+addOrbitPath(5, 5.2, 0x9700ff);
 
 let venusOrbit = venus_loader();
-addOrbitPath(7, 7.05);
+addOrbitPath(9, 9.2, 0xffb600);
 
 let earthOrbit = earth_loader();
-addOrbitPath(10, 10.05);
+addOrbitPath(14, 14.3, 0x00ecff);
 
 let marsOrbit = mars_loader();
-addOrbitPath(13, 13.05);
+addOrbitPath(21, 21.3, 0xff8300);
 
 let jupiterOrbit = jupiter_loader();
-addOrbitPath(16, 16.05);
+addOrbitPath(51, 51.4, 0xa75600);
 
 let saturnOrbit = saturn_loader();
-addOrbitPath(20, 20.05);
+addOrbitPath(70, 70.4, 0xfefa00);
 
 let uranusOrbit = uranus_loader();
-addOrbitPath(24, 24.05);
+addOrbitPath(92, 92.5, 0x00fec0);
 
 let neptureOrbit = nepture_loader();
-addOrbitPath(28, 28.05);
+addOrbitPath(115, 115.5, 0x009afe);
+
+
 
 // Add a point light to simulate sunlight
 const pointLight = new THREE.PointLight(0xffffff, 1, 100);
@@ -56,9 +60,9 @@ function animate() {
     sun.rotation.y += 0.001;
 
     // Mercury's orbit: Rotate the mercuryOrbit around the sun
-    mercuryOrbit.rotation.y += 0.03; 
+    mercuryOrbit.rotation.y += 0.00713954; 
 
-    venusOrbit.rotation.y += 0.02; 
+    venusOrbit.rotation.y += 0.017; 
 
     earthOrbit.rotation.y += 0.01;  
 
@@ -70,7 +74,7 @@ function animate() {
 
     uranusOrbit.rotation.y += 0.003;
 
-    neptureOrbit.rotation.y += 0.002;  // Neptune's orbit: Rotate the neptuneOrbit around the sun
+    neptureOrbit.rotation.y += 0.01;  // Neptune's orbit: Rotate the neptuneOrbit around the sun
 
     // Update the controls
     controls.update(); // Only required if controls.enableDamping = true, or if controls.autoRotate = true
@@ -153,7 +157,7 @@ function venus_loader() {
     const venusOrbit = new THREE.Object3D();
     venusOrbit.add(venus);
     scene.add(venusOrbit);
-    venus.position.x = 7;
+    venus.position.x = 9;
     return venusOrbit;
 }
 
@@ -172,7 +176,7 @@ function earth_loader() {
     const earthOrbit = new THREE.Object3D();
     earthOrbit.add(earth);
     scene.add(earthOrbit);
-    earth.position.x = 10;
+    earth.position.x = 14;
     return earthOrbit;
 }
 
@@ -191,7 +195,7 @@ function mars_loader() {
     const marsOrbit = new THREE.Object3D();
     marsOrbit.add(mars);
     scene.add(marsOrbit);
-    mars.position.x = 13;
+    mars.position.x = 21;
     return marsOrbit;
 }
 
@@ -210,7 +214,7 @@ function jupiter_loader() {
     const jupiterOrbit = new THREE.Object3D();
     jupiterOrbit.add(jupiter);
     scene.add(jupiterOrbit);
-    jupiter.position.x = 16;
+    jupiter.position.x = 51;
     return jupiterOrbit;
 }
 
@@ -229,7 +233,7 @@ function saturn_loader() {
     const saturnOrbit = new THREE.Object3D();
     saturnOrbit.add(saturn);
     scene.add(saturnOrbit);
-    saturn.position.x = 20;
+    saturn.position.x = 70;
     return saturnOrbit;
 }
 
@@ -248,7 +252,7 @@ function uranus_loader() {
     const uranusOrbit = new THREE.Object3D();
     uranusOrbit.add(uranus);
     scene.add(uranusOrbit);
-    uranus.position.x = 24;
+    uranus.position.x = 92;
     return uranusOrbit;
 }
 
@@ -267,16 +271,17 @@ function nepture_loader() {
     const neptureOrbit = new THREE.Object3D();
     neptureOrbit.add(nepture);
     scene.add(neptureOrbit);
-    nepture.position.x = 28;
+    nepture.position.x = 115;
+    
     return neptureOrbit;
 }
 
 
 // Optional: Create a visible orbit for Mercury
-function addOrbitPath(x, y) {
-    const orbitGeometry = new THREE.RingGeometry(x, y, 64); // Adjust size to match the orbit
+function addOrbitPath(x, y, color) {
+    const orbitGeometry = new THREE.RingGeometry(x, y, 100); // Adjust size to match the orbit
     const orbitMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff, 
+        color: color, 
         side: THREE.DoubleSide 
     });
     const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
