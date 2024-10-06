@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet: Venus</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-image: url('space.jpg'); /* Add your starry background image */
+            background-size: cover;
+            display: flex;
+            color: white;
+            font-family: Arial, sans-serif;
+            align-items: center; /* Center items vertically */
+            overflow: hidden; /* Prevent overall page scrolling */
+        }
+
+        .left-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2%;
+            background: rgba(0, 0, 0, 0.7);
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+        .surface-block {
+            width: 50%; /* Take 50% of the screen width */
+            padding: 10px;
+            max-width: none; /* Remove the max-width constraint */
+            height: auto;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin-right: 0; /* Keep it aligned with the left */
+            margin-left: 0; /* Align with the left edge */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .surface-block {
+                width: 60%; /* Adjust width on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .surface-block {
+                width: 80%; /* Further reduce width on very small screens */
+            }
+        }
+
+
+        .surface-image {
+            width: 80%; /* Image takes full width of the block */
+            max-width: 1000px; /* Max width for surface image */
+            border-radius: 10px; /* Round corners for the image */
+            margin: 20px 0; /* Space between image and info */
+            display: block; /* Make the image a block element */
+        }
+
+        .planet-info {
+            text-align: left; /* Align text to the left */
+            color: white; /* Change color to white for better visibility */
+            width: 100%; /* Make text take full width of the block */
+        }
+
+        .planet {
+            width: 100vw; /* Use viewport width for responsiveness */
+            height: 100vw; /* Maintain aspect ratio */
+            max-width: 400px; /* Maximum size */
+            max-height: 400px; /* Maximum size */
+            border-radius: 50%;
+            background-image: url('venus2.png'); /* Add rotating planet image */
+            background-size: cover;
+            animation: spin 10s linear infinite;
+            margin-left: auto; /* Align to the right */
+            position: absolute; /* Allow positioning */
+            right: 10%; /* Position on the right side */
+            top: 25%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust position */
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .surface-block {
+                width: 90%; /* More width on smaller screens */
+            }
+
+            .surface-image {
+                width: 80%; /* Adjust image width */
+            }
+
+            .planet {
+                width: 25vw; /* Smaller planet size */
+                height: 25vw; /* Maintain aspect ratio */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .surface-block {
+                width: 95%; /* Almost full width on very small screens */
+            }
+
+            .surface-image {
+                width: 90%; /* Further adjust image width */
+            }
+
+            .planet {
+                width: 20vw; /* Even smaller planet size */
+                height: 20vw; /* Maintain aspect ratio */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="left-container">
+        <div class="surface-block">
+            <h2 style="text-align: center;">Venus</h2>
+            <img class="surface-image" src="venus-surface.png" alt="Earth Surface from Space"> <!-- Add Earth's surface image -->
+            <div class="planet-info">
+                <p><strong>Mass:</strong> 4.867 × 10<sup>24</sup> kg</p>
+<p><strong>Rotation Speed:</strong> 6.52 km/h (retrograde rotation)</p>
+<p><strong>Orbital Period:</strong> 225 days</p>
+
+                <br>
+                <p>Venus is the second planet from the Sun and is often called Earth's "sister planet" due to their similar size and composition. However, Venus has a thick, toxic atmosphere that traps heat, making it the hottest planet.</p>
+                <p><strong>Fun Fact:</strong> Venus has a day that is longer than its year, as it takes about 243 Earth days to rotate once on its axis, but only 225 days to orbit the Sun.</p>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="planet"></div>
+
+</body>
+</html>

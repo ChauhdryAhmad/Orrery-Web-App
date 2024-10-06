@@ -339,49 +339,50 @@ function onMouseClick(event) {
     const mercury = raycaster.intersectObject(mercuryOrbit.mercury);
 
     if (mercury.length > 0) {
-        window.location.href = 'blackhole.html';
+        
+        window.location.href = 'solar-system/mercury.html';
     }
 
     const venus = raycaster.intersectObject(venusOrbit.venus);
 
     if (venus.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/venus.html';
     }
 
     const earth = raycaster.intersectObject(earthOrbit.earth);
 
     if (earth.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/earth.html';
     }
 
     const mars = raycaster.intersectObject(marsOrbit.mars);
 
     if (mars.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/mars.html';
     }
 
     const jupiter = raycaster.intersectObject(jupiterOrbit.jupiter);
 
     if (jupiter.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/jupiter.html';
     }
 
     const saturn = raycaster.intersectObject(saturnOrbit.saturn);
 
     if (saturn.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/saturn.html';
     }
 
     const uranus = raycaster.intersectObject(uranusOrbit.uranus);
 
     if (uranus.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/uranus.html';
     }
 
     const nepture = raycaster.intersectObject(neptureOrbit.nepture);
 
     if (nepture.length > 0) {
-        window.location.href = 'blackhole.html';
+        window.location.href = 'solar-system/neptune.html';
     }
 
 }
